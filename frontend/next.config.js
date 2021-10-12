@@ -9,7 +9,7 @@ module.exports = withTM({
   images: {
     domains: ['http://localhost', 'https://medeirosneto.herokuapp.com'],
   },
-  webpack: (config) => {
+  webpack: (config, options) => {
     config.module.rules.push({
       test: /\.mdx/,
       use: [
