@@ -1,22 +1,41 @@
-import React from "react"
-import Articles from "../components/articles"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import { fetchAPI } from "../lib/api"
+import React from "react";
+import Container from "@mui/material/Container";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
-const Home = ({ articles, categories, homepage }) => {
+import Articles from "../components/articles";
+import Seo from "../components/seo";
+import Image from "../components/image";
+import { fetchAPI } from "../lib/api";
+import { getStrapiMedia } from "../lib/media";
+
+import Copyright from "../src/Copyrigth";
+
+const Home = ({ articles, homepage, global }) => {
   return (
-    <Layout categories={categories}>
+    <>
       <Seo seo={homepage.seo} />
-      <div className="uk-section">
-        <div className="uk-container uk-container-large">
-          <h1>{homepage.hero.title}</h1>
-          <Articles articles={articles} />
+      <AppBar position="relative">
+        <Container>
+          <Toolbar>
+            <Typography variant="h6" color="inherit" noWrap>
+              Medeironeto.com
+            </Typography>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Container>
+        <div className="uk-section">
+          <div className="uk-container uk-container-large">
+            <Articles articles={articles} />
+          </div>
         </div>
-      </div>
-    </Layout>
-  )
-}
+        <Copyright />
+      </Container>
+    </>
+  );
+};
 
 export async function getStaticProps() {
   // Run API calls in parallel
@@ -24,12 +43,12 @@ export async function getStaticProps() {
     fetchAPI("/articles"),
     fetchAPI("/categories"),
     fetchAPI("/homepage"),
-  ])
+  ]);
 
   return {
     props: { articles, categories, homepage },
     revalidate: 1,
-  }
+  };
 }
 
-export default Home
+export default Home;
