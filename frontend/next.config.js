@@ -5,6 +5,10 @@ const withTM = require("next-transpile-modules")([
 
 module.exports = withTM({
   reactStrictMode: true,
+  target: "serverless",
+  images: {
+    domains: ['http://localhost', 'https://medeirosneto.herokuapp.com'],
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
