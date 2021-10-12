@@ -10,6 +10,16 @@ module.exports = withTM({
     domains: ['http://localhost', 'https://medeirosneto.herokuapp.com'],
   },
   webpack: (config) => {
+    config.module.rules.push({
+      test: /\.mdx/,
+      use: [
+        options.defaultLoaders.babel,
+        {
+          loader: '@mdx-js/loader',
+          options: pluginOptions.options,
+        },
+      ],
+    })
     config.resolve.alias = {
       ...config.resolve.alias,
       "@mui/styled-engine": "@mui/styled-engine-sc",
