@@ -1,3 +1,5 @@
+const withMDX = require('@next/mdx')();
+
 const withTM = require("next-transpile-modules")([
   "@mui/material",
   "@mui/system",
@@ -16,7 +18,7 @@ module.exports = withTM({
         options.defaultLoaders.babel,
         {
           loader: '@mdx-js/loader',
-          options: pluginOptions.options,
+          options: withMDX.options,
         },
       ],
     })
